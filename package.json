@@ -1,0 +1,15 @@
+{
+  "name": "publici-yo",
+  "version": "0.1.0",
+  "description": "Yo's whenever we post a new thing",
+  "main": "index.js",
+  "author": "Chris Zubak-Skees",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.4.4",
+    "logfmt": "^1.1.2",
+    "feed-read": "0.0.1",
+    "node-schedule": "^0.1.13",
+    "request": "^2.36.0"
+  }
+}
