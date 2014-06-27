@@ -1,8 +1,7 @@
 {
   "name": "publici-yo",
   "version": "0.1.0",
-  "description": "Yo's whenever we post a new thing",
-  "main": "index.js",
+  "description": "Yos whenever we post a new thing",
   "author": "Chris Zubak-Skees",
   "license": "MIT",
   "dependencies": {
