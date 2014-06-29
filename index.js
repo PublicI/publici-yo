@@ -19,6 +19,8 @@ function yoResult (err, httpResponse, body) {
 }
 
 function tellThePeople(article) {
+    console.log('sending yo');
+
     var r = request.post('http://api.justyo.co/yoall/', yoResult);
     var form = r.form();
     form.append('api_token', process.env.YO_TOKEN);
@@ -26,6 +28,7 @@ function tellThePeople(article) {
 
 
 function retrieveFeed(req, res) {
+    console.log('checking if yo');
     feed('http://feeds.feedburner.com/publici_rss',function (err, articles) {
         if (err) {
             console.error('feed load failed:', err);
