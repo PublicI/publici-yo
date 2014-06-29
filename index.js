@@ -74,7 +74,7 @@ function retrieveFeed(req, res) {
             '</channel>' +
             '</rss>';
 
-        res.send();
+        res.send(feed);
 
         initialLoad = false;
     });
