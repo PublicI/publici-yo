@@ -5,11 +5,6 @@ var express = require('express'),
 var alreadySeen = {};
 var initialLoad = true;
 
-function gotATestYo(req, res) {
-    console.log('got a test yo:',req.method,req.url,req.body);
-    res.send('Thanks!');
-}
-
 function gotAYo(req, res) {
     console.log('got a yo:',req.method,req.url,req.body);
     res.send('Thanks!');
@@ -24,8 +19,7 @@ function yoResult (err, httpResponse, body) {
 }
 
 function tellThePeople(article) {
-    // http://api.justyo.co/yoall/
-    var r = request.post('http://publici-yo.herokuapp.com/test-yo', yoResult);
+    var r = request.post('http://api.justyo.co/yoall/', yoResult);
     var form = r.form();
     form.append('api_token', process.env.YO_TOKEN);
 }
@@ -78,15 +72,14 @@ function retrieveFeed(req, res) {
 function init () {
     var app = express();
 
-    app.use(logfmt.requestLogger());
+    // app.use(logfmt.requestLogger());
 
     app.get('/got-a-yo', gotAYo);
-    app.get('/test-yo', gotATestYo);
     app.get('/check-if-yo', retrieveFeed);
 
     var port = Number(process.env.PORT || 5000);
     app.listen(port, function() {
-        console.log("Listening on " + port);
+        console.log('Listening on ' + port);
     });
 }
 
