@@ -56,10 +56,10 @@ function retrieveFeed(req, res) {
             '<rss version="2.0">' +
             '<channel>' +
             '<title>Publici Yos</title>' +
-            '<description>This is an example of an RSS feed</description>' +
-            '<link>http://www.example.com/main.html</link>' +
-            '<lastBuildDate>Mon, 06 Sep 2010 00:01:00 +0000 </lastBuildDate>' +
-            '<pubDate>Sun, 06 Sep 2009 16:20:00 +0000</pubDate>' +
+            '<description>This is a feed of some yos, yo</description>' +
+            '<link>http://www.publicintegrity.org/</link>' +
+            '<lastBuildDate>' + (new Date()).toUTCString() +  '</lastBuildDate>' +
+            '<pubDate>' + (new Date()).toUTCString() +  '</pubDate>' +
             '<ttl>1800</ttl>' +
             '';
 
