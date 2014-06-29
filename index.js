@@ -66,7 +66,8 @@ function retrieveFeed(req, res) {
         yosReceived.forEach(function (yo) {
             feed += '<item>' +
                 ' <title>' + yo.url + '</title>' +
-                ' <pubDate>' + yo.date.toString() +  '</pubDate>' +
+                ' <pubDate>' + yo.date.toUTCString() +  '</pubDate>' +
+                ' <guid>' + yo.date.toUTCString()+ yo.url +  '</guid>' +
                 '</item>';
         });
 
