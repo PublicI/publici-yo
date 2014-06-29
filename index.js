@@ -4,9 +4,14 @@ var express = require('express'),
 
 var alreadySeen = {};
 var initialLoad = true;
+var yosReceived = [];
 
 function gotAYo(req, res) {
-    console.log('got a yo:',req.method,req.url,req.body);
+    console.log('got a yo:',req.method,req.url);
+    yosReceived.push({
+        url: req.url,
+        date: new Date()
+    });
     res.send('Thanks!');
 }
 
@@ -47,26 +52,29 @@ function retrieveFeed(req, res) {
             tellThePeople(article);
         }
 
-        res.send('<?xml version="1.0" encoding="UTF-8" ?>' +
+        var feed = '<?xml version="1.0" encoding="UTF-8" ?>' +
             '<rss version="2.0">' +
             '<channel>' +
-            '<title>RSS Title</title>' +
+            '<title>Publici Yos</title>' +
             '<description>This is an example of an RSS feed</description>' +
             '<link>http://www.example.com/main.html</link>' +
             '<lastBuildDate>Mon, 06 Sep 2010 00:01:00 +0000 </lastBuildDate>' +
             '<pubDate>Sun, 06 Sep 2009 16:20:00 +0000</pubDate>' +
             '<ttl>1800</ttl>' +
-            '' +
-            '<item>' +
-            ' <title>Example entry</title>' +
-            ' <description>Here is some text containing an interesting description.</description>' +
-            ' <link>http://www.example.com/blog/post/1</link>' +
-            ' <guid>7bd204c6-1655-4c27-aeee-53f933c5395f</guid>' +
-            ' <pubDate>Sun, 06 Sep 2009 16:20:00 +0000</pubDate>' +
-            '</item>' +
-            '' +
+            '';
+
+        yosReceived.forEach(function (yo) {
+            feed += '<item>' +
+                ' <title>' + yo.url + '</title>' +
+                ' <pubDate>' + yo.date.toString() +  '</pubDate>' +
+                '</item>';
+        });
+
+        feed += '' +
             '</channel>' +
-            '</rss>');
+            '</rss>';
+
+        res.send();
 
         initialLoad = false;
     });
