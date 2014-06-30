@@ -23,7 +23,7 @@ function yoResult (err, httpResponse, body) {
     console.log('yo success:', body);
 }
 
-function tellThePeople(article) {
+function tellThePeople() {
     console.log('sending yo');
 
     var r = request.post('http://api.justyo.co/yoall/', yoResult);
@@ -49,7 +49,7 @@ function retrieveFeed(req, res) {
         });
 
         if (isNew) {
-            tellThePeople(article);
+            tellThePeople();
         }
 
         var feed = '<?xml version="1.0" encoding="UTF-8" ?>' +
