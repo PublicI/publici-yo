@@ -1,6 +1,7 @@
 var express = require('express'),
     logfmt = require('logfmt'),
-    feed = require('feed-read');
+    feed = require('feed-read'),
+    request = require('request');
 
 var alreadySeen = {};
 var initialLoad = true;
