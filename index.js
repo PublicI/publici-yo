@@ -68,7 +68,7 @@ function retrieveFeed(req, res) {
             feed += '<item>' +
                 ' <title>' + yo.url + '</title>' +
                 ' <pubDate>' + yo.date.toUTCString() +  '</pubDate>' +
-                ' <guid>' + yo.date.toUTCString()+ yo.url +  '</guid>' +
+                ' <guid>' + yo.url + '&when=' + encodeURIComponent(yo.date.toUTCString()) + '</guid>' +
                 '</item>';
         });
 
