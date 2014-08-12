@@ -8,11 +8,14 @@ var initialLoad = true;
 var yosReceived = [];
 
 function gotAYo(req, res) {
-    console.log('got a yo:',req.method,req.url);
+    console.log('got a yo:',req.param('username'));
     yosReceived.push({
         url: req.url,
         date: new Date()
     });
+
+    yoThePerson(req.param('username'));
+
     res.send('Thanks!');
 }
 
@@ -24,14 +27,23 @@ function yoResult (err, httpResponse, body) {
     console.log('yo success:', body);
 }
 
-function tellThePeople() {
+function yoThePeople(url) {
     console.log('sending yo');
 
     var r = request.post('http://api.justyo.co/yoall/', yoResult);
     var form = r.form();
     form.append('api_token', process.env.YO_TOKEN);
+    form.append('link', url);
 }
 
+function yoThePerson(user) {
+    console.log('sending yo');
+
+    var r = request.post('http://api.justyo.co/yo/', yoResult);
+    var form = r.form();
+    form.append('api_token', process.env.YO_TOKEN);
+    form.append('username', user);
+}
 
 function retrieveFeed(req, res) {
     console.log('checking if yo');
@@ -40,18 +52,14 @@ function retrieveFeed(req, res) {
             console.error('feed load failed:', err);
         }
 
-        var isNew = false;
-
         articles.forEach(function (article) {
             if (!(article.link in alreadySeen) && !initialLoad) {
-                isNew = true;
+                yoThePeople(article.link);
             }
+
+
             alreadySeen[article.link] = true;
         });
-
-        if (isNew) {
-            tellThePeople();
-        }
 
         var feed = '<?xml version="1.0" encoding="UTF-8" ?>' +
             '<rss version="2.0">' +
