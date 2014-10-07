@@ -1,6 +1,7 @@
 var express = require('express'),
     logfmt = require('logfmt'),
     feed = require('feed-read'),
+    _ = require('lodash'),
     request = require('request');
 
 var alreadySeen = {};
@@ -53,12 +54,13 @@ function retrieveFeed(req, res) {
         }
 
         articles.forEach(function (article) {
-            if (!(article.link in alreadySeen) && !initialLoad) {
+            console.log(article);
+            if (!(article.id in alreadySeen) && !initialLoad) {
                 yoThePeople(article.link);
             }
 
 
-            alreadySeen[article.link] = true;
+            alreadySeen[article.id] = true;
         });
 
         var feed = '<?xml version="1.0" encoding="UTF-8" ?>' +

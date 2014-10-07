@@ -6,8 +6,9 @@
   "license": "MIT",
   "dependencies": {
     "express": "^4.4.4",
+    "feed-read": "git+https://github.com/chriszs/feed-read.git",
+    "lodash": "^2.4.1",
     "logfmt": "^1.1.2",
-    "feed-read": "0.0.1",
     "request": "^2.36.0"
   }
 }
